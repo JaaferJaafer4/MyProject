@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/tests/MainClass.java</file>
             <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/services/ProduitCRUD.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/services/ProduitReview.java</file>
+            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/services/GestionRemise.java</file>
             <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/utils/MyConnection.java</file>
             <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/entities/Produit.java</file>
         </group>

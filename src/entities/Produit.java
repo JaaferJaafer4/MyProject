@@ -4,6 +4,8 @@
  */
 package entities;
 
+import java.util.Objects;
+
 /**
  *
  * @author SBS
@@ -38,7 +40,7 @@ public class Produit {
         this.categorie = categorie;
     }
 
-    public Produit(String lib_prod, String description, int prix_prod, int quaniteDispo, String categorie) {
+    public Produit(String lib_prod, String description, double prix_prod, int quaniteDispo, String categorie) {
         this.lib_prod = lib_prod;
         this.description = description;
         this.prix_prod = prix_prod;
@@ -93,8 +95,12 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" + "lib_prod=" + lib_prod + ", description=" + description + ", prix_prod=" + prix_prod + ", quaniteDispo=" + quaniteDispo + ", categorie=" + categorie + '}';
+        return "Produit{" + "lib_prod=" + lib_prod + ", description=" + description + ", prix_prod=" + prix_prod + "dt, quaniteDispo=" + quaniteDispo + ", categorie=" + categorie + '}';
     }
+
+
+
+    
 
 
     

@@ -34,8 +34,9 @@ public class MainClass {
       // rcd.deleteProd("kafteji");
  
       GestionRemise GR = new GestionRemise();
-      GR.RemiseOnProd("kafteji", 40);
-      GR.DisplayProd();
+      GR.remiseOnProd("kafteji", 40);
+      GR.taxPerProd(10);
+      GR.displayProd();
        
        
 
