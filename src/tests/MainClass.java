@@ -7,8 +7,9 @@ package tests;
 import entities.Produit;
 import java.util.ArrayList;
 import java.util.List;
+import services.GestionRemise;
 import services.ProduitCRUD;
-import services.ProduitReview;
+
 import utils.MyConnection;
 
 /**
@@ -26,16 +27,17 @@ public class MainClass {
        categories.add("breakfast");
                
        ProduitCRUD rcd = new ProduitCRUD();
-       Produit r = new Produit("gateau",8,categories.get(2)); 
+       Produit r = new Produit("gateau",4,categories.get(0)); 
     
-     //rcd.addRepa(r);     
-        rcd.updateRepa(r);
-      // rcd.deleteRepa("crepe");
-       for(Produit e : rcd.DisplayRepas()){
-           System.out.println(e);
-       }
+     // rcd.addProd(r);     
+      //  rcd.updateProd(r);
+      // rcd.deleteProd("kafteji");
+ 
+      GestionRemise GR = new GestionRemise();
+      GR.RemiseOnProd("kafteji", 40);
+      GR.DisplayProd();
        
-       new ProduitReview().like("gateau");
+       
 
     }
     

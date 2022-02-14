@@ -13,8 +13,7 @@ public class Produit {
 
     private String lib_prod; 
     private String description; 
-    private int prix_prod;
-    private int solde_prod;
+    private double prix_prod;
     private int quaniteDispo;
     private String categorie;
 
@@ -39,11 +38,11 @@ public class Produit {
         this.categorie = categorie;
     }
 
-    public Produit(String lib_prod, String description, int prix_prod, int solde_prod, int quaniteDispo, String categorie) {
+    public Produit(String lib_prod, String description, int prix_prod, int quaniteDispo, String categorie) {
         this.lib_prod = lib_prod;
         this.description = description;
         this.prix_prod = prix_prod;
-        this.solde_prod = solde_prod;
+
         this.quaniteDispo = quaniteDispo;
         this.categorie = categorie;
     }
@@ -66,21 +65,15 @@ public class Produit {
         this.description = description;
     }
 
-    public int getPrix_prod() {
+    public double getPrix_prod() {
         return prix_prod;
     }
 
-    public void setPrix_prod(int prix_prod) {
+    public void setPrix_prod(double prix_prod) {
         this.prix_prod = prix_prod;
     }
 
-    public int getSolde_prod() {
-        return solde_prod;
-    }
 
-    public void setSolde_prod(int solde_prod) {
-        this.solde_prod = solde_prod;
-    }
 
     public int getQuaniteDispo() {
         return quaniteDispo;
@@ -100,7 +93,7 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" + "lib_prod=" + lib_prod + ", description=" + description + ", prix_prod=" + prix_prod + ", solde_prod=" + solde_prod + ", quaniteDispo=" + quaniteDispo + ", categorie=" + categorie + '}';
+        return "Produit{" + "lib_prod=" + lib_prod + ", description=" + description + ", prix_prod=" + prix_prod + ", quaniteDispo=" + quaniteDispo + ", categorie=" + categorie + '}';
     }
 
 
