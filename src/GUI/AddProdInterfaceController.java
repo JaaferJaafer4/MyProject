@@ -12,22 +12,35 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import services.GestionRemise;
 import services.ProduitCRUD;
 
 /**
@@ -49,6 +62,9 @@ public class AddProdInterfaceController implements Initializable {
     private ComboBox<String> Cat_List;
 
     ProduitCRUD pcr = new ProduitCRUD();
+
+    GestionRemise Gr = new GestionRemise();
+    List<Produit> l = Gr.getListB();
 
     ObservableList<String> items = FXCollections.observableArrayList("Breakfast", "Plat", "Sandiwch", "Pizza", "Boisson", "Autre");
     ObservableList<String> prom = FXCollections.observableArrayList("0", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%");
@@ -103,7 +119,7 @@ public class AddProdInterfaceController implements Initializable {
 
                     Image_btn.setText(selectedFile.getName());
                     from = Paths.get(selectedFile.toURI());
-                    to = Paths.get("C:\\Users\\SBS\\Documents\\NetBeansProjects\\MyProject\\src\\GUI\\Photos\\" + lib+".png");
+                    to = Paths.get("C:\\Users\\SBS\\Documents\\NetBeansProjects\\MyProject\\src\\GUI\\Photos\\" + lib + ".png");
                     Files.copy(from, to);
                     p.setPath(to.toString());
 
@@ -194,14 +210,28 @@ public class AddProdInterfaceController implements Initializable {
 
         } else {
             try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Verification");
+                alert.setContentText("êtes-vous sûr ?");
+                ButtonType okButton = new ButtonType("Oui ", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
 
-                pcr.deleteProd(lib_txt.getText());
-                quantity_txt.setText("");
-                price_txt.setText("");
-                lib_txt.setText("");
-                Desc_txt.setText("");
-                Cat_List.setValue(null);
-                JOptionPane.showMessageDialog(null, "Repa Supprimé", "Supprimé ", JOptionPane.INFORMATION_MESSAGE);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton) {
+
+                        pcr.deleteProd(lib_txt.getText());
+                        quantity_txt.setText("");
+                        price_txt.setText("");
+                        lib_txt.setText("");
+                        Desc_txt.setText("");
+                        Cat_List.setValue(null);
+                        JOptionPane.showMessageDialog(null, "Repa Supprimé", "Supprimé ", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+
+                    }
+                });
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error!", "error ", JOptionPane.ERROR_MESSAGE);
 
@@ -216,7 +246,7 @@ public class AddProdInterfaceController implements Initializable {
         Path to;
 
         FileChooser fc = new FileChooser();
-         selectedFile = fc.showOpenDialog(null);
+        selectedFile = fc.showOpenDialog(null);
         /* fc.setInitialDirectory(new File("C:\\Users\\SBS\\Pictures"));
         
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
@@ -234,4 +264,82 @@ public class AddProdInterfaceController implements Initializable {
 
     }
 
+    @FXML
+    private void ShowStats(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.setTitle("JavaFX Chart Demo");
+        StackPane pane = new StackPane();
+        pane.getChildren().add(createBarChart());
+
+        stage.setScene(new Scene(pane, 400, 200));
+        stage.show();
+    }
+
+    public ObservableList<XYChart.Series<String, Double>>
+            getDummyChartData() {
+        ObservableList<XYChart.Series<String, Double>> data
+                = FXCollections.observableArrayList();
+        XYChart.Series<String, Double> as = new XYChart.Series<>();
+        /*XYChart.Series<String, Double> bs = new XYChart.Series<>();
+      XYChart.Series<String, Double> cs = new XYChart.Series<>();
+      XYChart.Series<String, Double> ds = new XYChart.Series<>();
+      XYChart.Series<String, Double> es = new XYChart.Series<>();
+      XYChart.Series<String, Double> fs = new XYChart.Series<>();*/
+        as.setName("A-Series");
+        /*  bs.setName("B-Series");
+      cs.setName("C-Series");
+      ds.setName("D-Series");
+      es.setName("E-Series");
+      fs.setName("F-Series");
+
+      Random r = new Random();
+      
+
+      for (int i = 1900; i < 2017; i += 10) {
+
+         as.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         bs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         cs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         ds.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         es.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         fs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+      }
+      data.addAll(as, bs, cs, ds, es, fs);
+      return data;
+   }*/
+
+        for (Produit i : l) {
+
+            as.getData().add(new XYChart.Data<>(i.getLib_prod(), Double.valueOf(i.getQuaniteDispo())));
+            /* bs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         cs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         ds.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         es.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));
+         fs.getData().add(new XYChart.Data<>
+         (Integer.toString(i), r.nextDouble()));*/
+        }
+        //  data.addAll(as, bs, cs, ds, es, fs);
+        data.addAll(as);
+        return data;
+    }
+
+    public XYChart<CategoryAxis, NumberAxis>
+            createBarChart() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart bc = new BarChart<>(xAxis, yAxis);
+        bc.setData(getDummyChartData());
+        bc.setTitle("Quantites Disponibles");
+        return bc;
+    }
 }

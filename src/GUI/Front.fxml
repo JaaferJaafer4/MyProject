@@ -16,10 +16,5 @@
             <Font size="40.0" />
          </font>
       </Button>
-      <Button layoutX="200.0" layoutY="244.0" mnemonicParsing="false" onAction="#GoMap" text="Maps">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
