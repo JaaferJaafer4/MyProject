@@ -18,28 +18,24 @@ import utils.MyConnection;
  */
 public class MainClass {
 
-
     public static void main(String[] args) {
+
+        List<String> categories = new ArrayList();
+        categories.add("plat");
+        categories.add("other");
+        categories.add("breakfast");
+
+        ProduitCRUD rcd = new ProduitCRUD();
+        Produit r = new Produit("gateau", 4, categories.get(0));
+
+        // rcd.addProd(r);     
+        //  rcd.updateProd(r);
+        // rcd.deleteProd("kafteji");
+        GestionRemise GR = new GestionRemise();
        
-       List<String> categories = new ArrayList();
-       categories.add("plat");
-       categories.add("other");
-       categories.add("breakfast");
-               
-       ProduitCRUD rcd = new ProduitCRUD();
-       Produit r = new Produit("gateau",4,categories.get(0)); 
-    
-     // rcd.addProd(r);     
-      //  rcd.updateProd(r);
-      // rcd.deleteProd("kafteji");
- 
-      GestionRemise GR = new GestionRemise();
-      GR.remiseOnProd("kafteji", 40);
-      GR.taxPerProd(10);
-      GR.displayProd();
-       
-       
+       // GR.taxPerProd(10);
+        GR.displayProd();
 
     }
-    
+
 }

@@ -16,29 +16,26 @@ public class GestionRemise {
 
     List<Produit> l;
     List<Produit> l2;
+    
+    double taux;
 
     public GestionRemise() {
         l = new ProduitCRUD().GetProd();
-        l2 = new ArrayList();
-        l2.addAll(l);
-
-    }
-
-    public void remiseOnProd(String lib_prod, double by) {
-
-        if (by > 0 && by < 80) {
-
-            for (Produit e : l2) {
-
-                if (e.getLib_prod().matches(".*" + lib_prod + "*")) {
-                    e.setPrix_prod(e.getPrix_prod() * (by * 0.01));
-                    System.out.println("Remise effectué");
-                }
-
+        l2 = clone(l);
+        for(Produit p : l2)
+        {
+            
+            if(!p.getRemise().equals("0%"))
+            {
+               p.setPrix_prod(p.getPrix_prod()-(p.getPrix_prod()*Integer.parseInt(p.getRemise().replace("%", "")))*0.01); 
             }
         }
+        
+        taux = 0;
 
     }
+
+   
 
     public void taxPerProd(double tax) {
 
@@ -47,6 +44,7 @@ public class GestionRemise {
             for (Produit e : l2) {
 
                 e.setPrix_prod(e.getPrix_prod() - (e.getPrix_prod() * (tax * 0.01)));
+                taux = tax;
 
             }
             System.out.println("tax effectué");
@@ -60,11 +58,36 @@ public class GestionRemise {
         for (Produit e : l) {
             System.out.println(e);
         }
-
-        System.out.println("\nAprés le Remise");
+System.out.println("\nApres le Remise");
         for (Produit e : l2) {
             System.out.println(e);
         }
     }
+    
+    public List<Produit> clone(List<Produit> lo){
+        List<Produit> lc = new ArrayList();
+        for(Produit e : lo)
+        {
+            Produit p = new Produit();
+            p.setId_prod(e.getId_prod());
+            p.setLib_prod(e.getLib_prod());
+            p.setDescription(e.getDescription());
+            p.setPrix_prod(e.getPrix_prod());
+            p.setQuaniteDispo(e.getQuaniteDispo());
+            p.setRemise(e.getRemise());
+            p.setCategorie(e.getCategorie());
+            lc.add(p);
+        }
+        return lc;
+    }
+    
+    public List<Produit> getListB(){
+        return l2;
+    }
 
+    public List<Produit> getListA(){
+        return l;
+    }
+    
+    
 }
