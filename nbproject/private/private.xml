@@ -3,18 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/tests/MainClass.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/services/ProduitCRUD.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/services/GestionRemise.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/MainFx.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/FrontController.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/Chart.fxml</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/AddProdInterfaceController.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/ChartController.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/entities/Images.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/entities/Produit.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/MainInterController.java</file>
-            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject/src/GUI/Front.fxml</file>
+            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject3/src/GUI/MainInterController.java</file>
+            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject3/src/GUI/MarcherProduitController.java</file>
+            <file>file:/C:/Users/SBS/Documents/NetBeansProjects/MyProject3/src/GUI/MainFx.java</file>
         </group>
     </open-files>
 </project-private>

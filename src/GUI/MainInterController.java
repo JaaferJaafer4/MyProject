@@ -28,7 +28,6 @@ import javafx.util.Callback;
 import services.GestionRemise;
 import services.ProduitCRUD;
 
-
 /**
  * FXML Controller class
  *
@@ -53,7 +52,7 @@ public class MainInterController implements Initializable {
     @FXML
     private ComboBox<String> sort_cb;
 
-    ObservableList<String> categories = FXCollections.observableArrayList("Breakfast", "Plat", "Sandiwch", "Pizza", "Boisson", "Autre");
+    ObservableList<String> categories = FXCollections.observableArrayList("Breakfast", "Plat", "Sandiwch", "Pizza", "Boisson", "Autre", "Tout");
     ObservableList<String> sortitems = FXCollections.observableArrayList("Prix", "Promotions", "Nom");
 
     GestionRemise Gr = new GestionRemise();
@@ -86,13 +85,24 @@ public class MainInterController implements Initializable {
         Main_Table.getItems().setAll(l);
 
         Images Im = new Images();
-        
-       // Image_col.setCellFactory((Callback<TableColumn<Images, ImageView>, TableCell<Images, ImageView>>) Im.getProd_images());
-        
+
+        // Image_col.setCellFactory((Callback<TableColumn<Images, ImageView>, TableCell<Images, ImageView>>) Im.getProd_images());
     }
 
     @FXML
     private void appliquer(ActionEvent event) {
+
+        if (categ_cb.getValue() == "Tout") {
+            List<Produit> l2 = new ArrayList();
+            for (Produit p : l) {
+
+                l2.add(p);
+
+            }
+            Main_Table.getItems().setAll(l2);
+
+            categ_cb.setValue(null);
+        }
 
         if (categ_cb.getValue() != null && sort_cb.getValue() == null) {
             List<Produit> l2 = new ArrayList();
@@ -103,6 +113,7 @@ public class MainInterController implements Initializable {
             }
 
             Main_Table.getItems().setAll(l2);
+
             categ_cb.setValue(null);
         }
 
@@ -144,7 +155,31 @@ public class MainInterController implements Initializable {
             sort_cb.setValue(null);
         }
 
+    }
 
+    @FXML
+    private void groupBy(ActionEvent event) {
+        List<Produit> l2 = new ArrayList();
+
+        for (Produit p : l) {
+            if (p.getCategorie().equals(categ_cb.getValue())) {
+                l2.add(p);
+            }
+        }
+        Main_Table.getItems().setAll(l2);
+    }
+
+    @FXML
+    private void sortBy(ActionEvent event) {
+        TreeSet<Produit> ts = null;
+        if (sort_cb.getValue().equals("Nom")) {
+            ts = l.stream().collect(Collectors.toCollection(() -> new TreeSet<>((a, b) -> a.getLib_prod().compareTo(b.getLib_prod()))));
+        } else if (sort_cb.getValue().equals("Prix")) {
+            ts = l.stream().collect(Collectors.toCollection(() -> new TreeSet<>((a, b) -> (int) a.getPrix_prod() - (int) b.getPrix_prod())));
+        } else {
+            ts = l.stream().collect(Collectors.toCollection(() -> new TreeSet<>((a, b) -> a.getRemise().compareTo(b.getRemise()))));
+        }
+        Main_Table.getItems().setAll(ts);
     }
 
 }

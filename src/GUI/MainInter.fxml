@@ -22,8 +22,8 @@
             </ImageView>
             <Pane layoutX="32.0" layoutY="28.0" prefHeight="79.0" prefWidth="662.0" style="-fx-background-color: #fafafa;">
                <children>
-                  <ComboBox fx:id="categ_cb" layoutX="27.0" layoutY="26.0" prefHeight="28.0" prefWidth="136.0" promptText="Catégorie" />
-                  <ComboBox fx:id="sort_cb" layoutX="222.0" layoutY="26.0" prefHeight="28.0" prefWidth="136.0" promptText="Sort By" />
+                  <ComboBox fx:id="categ_cb" layoutX="27.0" layoutY="26.0" onAction="#groupBy" prefHeight="28.0" prefWidth="136.0" promptText="Catégorie" />
+                  <ComboBox fx:id="sort_cb" layoutX="222.0" layoutY="26.0" onAction="#sortBy" prefHeight="28.0" prefWidth="136.0" promptText="Sort By" />
                   <Button layoutX="446.0" layoutY="20.0" mnemonicParsing="false" onAction="#appliquer" prefHeight="40.0" prefWidth="99.0" text="appliquer ">
                      <font>
                         <Font name="Gabriola" size="20.0" />

@@ -27,7 +27,7 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Front.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MenuInter.fxml"));
             Scene scene = new Scene(root, 600, 300);
             
             

@@ -6,6 +6,7 @@
 package GUI;
 
 import entities.Produit;
+import entities.User;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +43,8 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import services.GestionRemise;
 import services.ProduitCRUD;
+import services.UserCRUD;
+import utils.Mailing;
 
 /**
  * FXML Controller class
@@ -92,12 +95,24 @@ public class AddProdInterfaceController implements Initializable {
 
     @FXML
     private void AddProduct(ActionEvent event) throws IOException {
+        boolean checkexist = false;
 
-        if (lib_txt.getText().equals("") || price_txt.getText().equals("") || quantity_txt.getText().equals("") || Desc_txt.getText().equals("") || Cat_List.getValue() == null) {
+        for(Produit p : l)
+        {
+            if(p.getLib_prod().equals(lib_txt.getText()))
+                checkexist = true;
+        }
+        if (lib_txt.getText().equals("") || price_txt.getText().equals("") || quantity_txt.getText().equals("") || Desc_txt.getText().equals("") || Cat_List.getValue() == null ) {
 
             JOptionPane.showMessageDialog(null, "Champ manquant!", "Input error ", JOptionPane.ERROR_MESSAGE);
 
         } else {
+            if(checkexist)
+            {
+                            JOptionPane.showMessageDialog(null, "Nom deja existe!", "Input error ", JOptionPane.ERROR_MESSAGE);
+            lib_txt.setText("");
+            }
+            else{
             try {
                 if (selectedFile != null) {
                     int price = Integer.parseInt(price_txt.getText());
@@ -112,17 +127,32 @@ public class AddProdInterfaceController implements Initializable {
 
                     if (Remise_cb.getValue() != null) {
                         p.setRemise(Remise_cb.getValue());
+                        if (Integer.parseInt(Remise_cb.getValue().replace("%", "")) >= 50) {
+                            UserCRUD ucr = new UserCRUD();
+                            List<User> lu = ucr.GetProd();
+                            System.out.println("test");
+                            for (User u : lu) {
+                                if (u.getFollow() == 1) {
+
+                                    Mailing.sendMail(u.getEmail(), p.getLib_prod() + "a un remise de " + p.getRemise(), "Remise");
+                                }
+                            }
+                        }
                     }
 
-                    Path from;
-                    Path to;
+                    try {
+                        Path from;
+                        Path to;
 
-                    Image_btn.setText(selectedFile.getName());
-                    from = Paths.get(selectedFile.toURI());
-                    to = Paths.get("C:\\Users\\SBS\\Documents\\NetBeansProjects\\MyProject\\src\\GUI\\Photos\\" + lib + ".png");
-                    Files.copy(from, to);
-                    p.setPath(to.toString());
+                        
+                        from = Paths.get(selectedFile.toURI());
+                        to = Paths.get("C:\\Users\\Nour\\Documents\\NetBeansProjects\\MyProject\\src\\GUI\\Photos\\" + lib + ".png");
+                        Files.copy(from, to);
+                        p.setPath(to.toString());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e, "Input error ", JOptionPane.ERROR_MESSAGE);
 
+                    }
                     pcr.addProd(p);
                     quantity_txt.setText("");
                     price_txt.setText("");
@@ -143,6 +173,7 @@ public class AddProdInterfaceController implements Initializable {
 
         }
 
+    }
     }
 
     @FXML
@@ -242,8 +273,7 @@ public class AddProdInterfaceController implements Initializable {
 
     @FXML
     private void ImageManipulation() {
-        Path from;
-        Path to;
+     
 
         FileChooser fc = new FileChooser();
         selectedFile = fc.showOpenDialog(null);
