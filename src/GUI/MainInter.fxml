@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainInterController">
    <content>
@@ -23,12 +21,7 @@
             <Pane layoutX="32.0" layoutY="28.0" prefHeight="79.0" prefWidth="662.0" style="-fx-background-color: #fafafa;">
                <children>
                   <ComboBox fx:id="categ_cb" layoutX="27.0" layoutY="26.0" onAction="#groupBy" prefHeight="28.0" prefWidth="136.0" promptText="Catégorie" />
-                  <ComboBox fx:id="sort_cb" layoutX="222.0" layoutY="26.0" onAction="#sortBy" prefHeight="28.0" prefWidth="136.0" promptText="Sort By" />
-                  <Button layoutX="446.0" layoutY="20.0" mnemonicParsing="false" onAction="#appliquer" prefHeight="40.0" prefWidth="99.0" text="appliquer ">
-                     <font>
-                        <Font name="Gabriola" size="20.0" />
-                     </font>
-                  </Button>
+                  <ComboBox fx:id="sort_cb" layoutX="289.0" layoutY="26.0" onAction="#sortBy" prefHeight="28.0" prefWidth="136.0" promptText="Sort By" />
                </children>
             </Pane>
             <TableView fx:id="Main_Table" layoutX="32.0" layoutY="107.0" prefHeight="482.0" prefWidth="662.0" style="-fx-border-color: black;">
